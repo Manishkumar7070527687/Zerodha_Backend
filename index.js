@@ -22,6 +22,7 @@ app.use(express.json()); // allows us to parse incoming requests:req.body
 
 const allowedOrigins = [
   "https://zerodha-lyart-three.vercel.app/",
+
   "https://zerodha-frontend-mu.vercel.app/",
 ];
 
@@ -38,10 +39,6 @@ app.use(
     credentials: true,
   })
 );
-
-
-
-
 
 app.use(bodyParser.json());
 
@@ -199,8 +196,8 @@ app.use(bodyParser.json());
 
 app.get("/allHoldings", async (req, res) => {
   try {
-     let allHoldings = await HoldingsModel.find({});
-   
+    let allHoldings = await HoldingsModel.find({});
+
     console.log("Sending data ", allHoldings);
     res.json(allHoldings);
   } catch (err) {
@@ -233,7 +230,6 @@ app.get("/newOrder", async (req, res) => {
   let allOrders = await OrdersModel.find({});
   res.json(allOrders);
 });
-
 
 app.post("/signup", authRoute);
 app.post("/login", authRoute);
