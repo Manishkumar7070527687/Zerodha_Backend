@@ -21,9 +21,9 @@ app.use(express.json()); // allows us to parse incoming requests:req.body
 // app.use(cors({ origin: "http://localhost:5174", credentials: true })); // frontend link
 
 const allowedOrigins = [
-  "https://zerodha-lyart-three.vercel.app/",
+  "https://zerodha-lyart-three.vercel.app",
 
-  "https://zerodha-frontend-mu.vercel.app/",
+  "https://zerodha-frontend-mu.vercel.app",
 ];
 
 app.use(
@@ -161,36 +161,36 @@ app.use(bodyParser.json());
 //   console.log("Data inserted.........");
 // });
 
-// app.get("/addPositions", async (req, res) => {
-//   console.log("sending the data");
-//   let tempOfPositions = [
-//     {
-//       product: "CNC",
-//       name: "EVEREADY",
-//       qty: 2,
-//       avg: 316.27,
-//       price: 312.35,
-//       net: "+0.58%",
-//       day: "-1.24%",
-//       isLoss: true,
-//     },
-//     {
-//       product: "CNC",
-//       name: "JUBLFOOD",
-//       qty: 1,
-//       avg: 3124.75,
-//       price: 3082.65,
-//       net: "+10.04%",
-//       day: "-1.35%",
-//       isLoss: true,
-//     },
-//   ];
+app.get("/addPositions", async (req, res) => {
+  console.log("sending the data");
+  let tempOfPositions = [
+    {
+      product: "CNC",
+      name: "EVEREADY",
+      qty: 2,
+      avg: 316.27,
+      price: 312.35,
+      net: "+0.58%",
+      day: "-1.24%",
+      isLoss: true,
+    },
+    {
+      product: "CNC",
+      name: "JUBLFOOD",
+      qty: 1,
+      avg: 3124.75,
+      price: 3082.65,
+      net: "+10.04%",
+      day: "-1.35%",
+      isLoss: true,
+    },
+  ];
 
-//   await PositionsModel.insertMany(tempOfPositions);
-//   console.log("sending the data");
-//   console.log("all position done");
-//   res.send("Positions Done");
-// });
+  await PositionsModel.insertMany(tempOfPositions);
+  console.log("sending the data");
+  console.log("all position done");
+  res.send("Positions Done");
+});
 
 // on  end point api create
 
