@@ -21,8 +21,8 @@ app.use(express.json()); // allows us to parse incoming requests:req.body
 // app.use(cors({ origin: "http://localhost:5174", credentials: true })); // frontend link
 
 const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:5174",
+  "https://zerodha-lyart-three.vercel.app/",
+  "https://zerodha-frontend-mu.vercel.app/",
 ];
 
 app.use(
