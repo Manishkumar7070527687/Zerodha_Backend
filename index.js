@@ -16,14 +16,17 @@ const URL = process.env.MONGO_URL;
 const app = express();
 const authRoute = require("./Routes/AuthRoute.js");
 const { db } = require("./models/UsersModel.js");
+const cookieParser = require("cookie-parser");
 
 app.use(express.json()); // allows us to parse incoming requests:req.body
 // app.use(cors({ origin: "http://localhost:5174", credentials: true })); // frontend link
 
-const allowedOrigins = [
-  "https://zerodha-lyart-three.vercel.app",
+app.use(cookieParser());
 
-  "https://zerodha-frontend-mu.vercel.app",
+const allowedOrigins = [
+  "https://zerodha-lyart-three.vercel.app", // dashbord
+
+  "https://zerodha-frontend-mu.vercel.app", // frontend
 ];
 
 app.use(
@@ -41,6 +44,8 @@ app.use(
 );
 
 app.use(bodyParser.json());
+
+app.use("/auth",authRoute);
 
 // app.get("/addHoldings", async (req, res) => {
 //   console.log("Sending the data.........");
@@ -161,36 +166,36 @@ app.use(bodyParser.json());
 //   console.log("Data inserted.........");
 // });
 
-app.get("/addPositions", async (req, res) => {
-  console.log("sending the data");
-  let tempOfPositions = [
-    {
-      product: "CNC",
-      name: "EVEREADY",
-      qty: 2,
-      avg: 316.27,
-      price: 312.35,
-      net: "+0.58%",
-      day: "-1.24%",
-      isLoss: true,
-    },
-    {
-      product: "CNC",
-      name: "JUBLFOOD",
-      qty: 1,
-      avg: 3124.75,
-      price: 3082.65,
-      net: "+10.04%",
-      day: "-1.35%",
-      isLoss: true,
-    },
-  ];
+// app.get("/addPositions", async (req, res) => {
+//   console.log("sending the data");
+//   let tempOfPositions = [
+//     {
+//       product: "CNC",
+//       name: "EVEREADY",
+//       qty: 2,
+//       avg: 316.27,
+//       price: 312.35,
+//       net: "+0.58%",
+//       day: "-1.24%",
+//       isLoss: true,
+//     },
+//     {
+//       product: "CNC",
+//       name: "JUBLFOOD",
+//       qty: 1,
+//       avg: 3124.75,
+//       price: 3082.65,
+//       net: "+10.04%",
+//       day: "-1.35%",
+//       isLoss: true,
+//     },
+//   ];
 
-  await PositionsModel.insertMany(tempOfPositions);
-  console.log("sending the data");
-  console.log("all position done");
-  res.send("Positions Done");
-});
+//   await PositionsModel.insertMany(tempOfPositions);
+//   console.log("sending the data");
+//   console.log("all position done");
+//   res.send("Positions Done");
+// });
 
 // on  end point api create
 
@@ -231,8 +236,7 @@ app.get("/newOrder", async (req, res) => {
   res.json(allOrders);
 });
 
-app.post("/signup", authRoute);
-app.post("/login", authRoute);
+ 
 
 mongoose
   .connect(URL)

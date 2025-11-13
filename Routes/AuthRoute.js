@@ -11,6 +11,6 @@ router.post("/signup", signup);
 router.post("/login", login);
 
 // // POST / userverification
-//router.post("/",userVerification)
+router.post("/",userVerification)
 
 module.exports = router;
