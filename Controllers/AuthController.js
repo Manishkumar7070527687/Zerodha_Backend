@@ -34,6 +34,8 @@ module.exports.signup = async (req, res, next) => {
     res.cookie("token", token, {
       withCredentials: true,
       httpOnly: false, // use true in production
+      sameSite:"none",
+      secure:true,
     });
 
     return res
@@ -84,7 +86,7 @@ module.exports.userVerification = (req, res) => {
     return res.json({ status: false });
   }
 
-  jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
+  jwt.verify(token, process.env.TOKENKEY, async (err, data) => {
     if (err) {
       return res.json({ status: false });
     } else {
